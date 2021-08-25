@@ -1,16 +1,44 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Programação Orientada a Objetos
+# AC02 ADS-EaD - Implementação de classes
+# Allan Cordeiro
+# Email Impacta: allan.cordeiro@aluno.faculdadeimpacta.com.br
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+class Conta:
+    def __init__(self, titular, agencia, numero, saldo_inicial):
+        self._titular = titular
+        self._agencia = agencia
+        self._numero = numero
+        self._saldo = saldo_inicial
+        self._ativa = False
+        self._operacoes = []
+        self._gravar_operacao('saldo inicial', self._saldo)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    def _gravar_operacao(self, operacao, valor):
+        self._operacoes.append((operacao, valor))
+
+    # property blocks
+    @property
+    def titular(self):
+        return self._titular
+
+    @property
+    def agencia(self):
+        return self._agencia
+
+    @property
+    def numero(self):
+        return self._numero
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    @property
+    def ativa(self):
+        return self._ativa
+
+    @ativa.setter
+    def ativa(self, valor):
+        if isinstance(valor, bool):
+            self._ativa = valor
