@@ -2,6 +2,7 @@
 # AC02 ADS-EaD - Implementação de classes
 # Allan Cordeiro
 # Email Impacta: allan.cordeiro@aluno.faculdadeimpacta.com.br
+import atividade_conta
 
 
 class Conta:
@@ -13,11 +14,6 @@ class Conta:
         self._ativa = False
         self._operacoes = []
         self._gravar_operacao('saldo inicial', self._saldo)
-
-    # isso é temporario
-    @property
-    def operacoes(self):
-        return self._operacoes
 
     # property blocks
     @property
@@ -60,12 +56,18 @@ class Conta:
                 return True
         return False
 
-    def transferir(self):
-        pass
+    def transferir(self, conta_destino, valor):
+        if conta_destino.ativa:
+            if self._validar_condicoes(valor) and self._saldo >= valor:
+                conta_destino._saldo += valor
+                self._saldo -= valor
+                self._gravar_operacao('transferencia', valor)
+                conta_destino._gravar_operacao('transferencia', valor)
+                return True
+        return False
 
     def tirar_extrato(self):
-        pass
-
+        return self._operacoes
 
     def _gravar_operacao(self, operacao, valor):
         self._operacoes.append((operacao, valor))
