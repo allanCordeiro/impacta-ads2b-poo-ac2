@@ -14,9 +14,6 @@ class Conta:
         self._operacoes = []
         self._gravar_operacao('saldo inicial', self._saldo)
 
-    def _gravar_operacao(self, operacao, valor):
-        self._operacoes.append((operacao, valor))
-
     # isso é temporario
     @property
     def operacoes(self):
@@ -49,17 +46,31 @@ class Conta:
             self._ativa = valor
 
     def depositar(self, valor):
-        if self.ativa and valor > 0:
+        if self._validar_condicoes(valor):
             self._saldo += valor
             self._gravar_operacao('deposito', valor)
             return True
         return False
 
-    def sacar(self):
-        pass
+    def sacar(self, valor):
+        if self._validar_condicoes(valor):
+            if self.saldo >= valor:
+                self._saldo -= valor
+                self._gravar_operacao('saque', valor)
+                return True
+        return False
 
     def transferir(self):
         pass
 
     def tirar_extrato(self):
         pass
+
+
+    def _gravar_operacao(self, operacao, valor):
+        self._operacoes.append((operacao, valor))
+
+    def _validar_condicoes(self, valor):
+        if self.ativa and valor > 0:
+            return True
+        return False
