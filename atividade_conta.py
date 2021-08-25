@@ -17,6 +17,11 @@ class Conta:
     def _gravar_operacao(self, operacao, valor):
         self._operacoes.append((operacao, valor))
 
+    # isso é temporario
+    @property
+    def operacoes(self):
+        return self._operacoes
+
     # property blocks
     @property
     def titular(self):
@@ -42,3 +47,19 @@ class Conta:
     def ativa(self, valor):
         if isinstance(valor, bool):
             self._ativa = valor
+
+    def depositar(self, valor):
+        if self.ativa and valor > 0:
+            self._saldo += valor
+            self._gravar_operacao('deposito', valor)
+            return True
+        return False
+
+    def sacar(self):
+        pass
+
+    def transferir(self):
+        pass
+
+    def tirar_extrato(self):
+        pass
