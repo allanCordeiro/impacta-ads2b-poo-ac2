@@ -43,16 +43,12 @@ class Conta:
         if self._validar_condicoes(valor):
             self.__saldo += valor
             self._gravar_operacao('deposito', valor)
-            return True
-        return False
 
     def sacar(self, valor):
         if self._validar_condicoes(valor):
             if self.saldo >= valor:
                 self.__saldo -= valor
                 self._gravar_operacao('saque', valor)
-                return True
-        return False
 
     def transferir(self, conta_destino, valor):
         if conta_destino.ativa:
@@ -61,8 +57,6 @@ class Conta:
                 self.__saldo -= valor
                 self._gravar_operacao('transferencia', valor)
                 # conta_destino._gravar_operacao('transferencia', valor)
-                return True
-        return False
 
     def tirar_extrato(self):
         return self.__operacoes
